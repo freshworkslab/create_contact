@@ -8,7 +8,7 @@ const FRESHSALES_DOMAIN = 'your-domain.freshsales.io'; // Replace with your Fres
 const API_TOKEN = 'sfg999666t673t7t82'; // Replace with your actual Freshsales API token
 
 app.post('/create-contact', (req, res) => {
-    const { first_name, last_name, mobile_number } = req.body;
+    const { first_name, last_name, email } = req.body;
 
     const contactData = {
         contact: {
