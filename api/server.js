@@ -7,7 +7,7 @@ app.use(express.json());
 const FRESHSALES_DOMAIN = 'fwlabscrm.myfreshworks.com/crm/sales'; // Replace with your Freshsales domain
 const API_TOKEN = 'QPDW5whjK9BWBzWYc7opbA'; // Replace with your actual Freshsales API token
 
-app.post('/create-contact', (req, res) => {
+app.post('/api/create-contact', (req, res) => {  // Make sure the route starts with /api
     const { first_name, last_name, email } = req.body;
 
     const contactData = {
@@ -15,7 +15,7 @@ app.post('/create-contact', (req, res) => {
             first_name: first_name,
             last_name: last_name,
             email: email,
-            lifecycle_stage_id  :403017878192
+            lifecycle_stage_id: 403017878192
         }
     };
 
