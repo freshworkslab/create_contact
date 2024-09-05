@@ -1,36 +1,40 @@
-const express = require('express');
 const axios = require('axios');
 
-const app = express();
-app.use(express.json());
+// Replace with your Freshsales domain and API token
+const FRESHSALES_DOMAIN = 'fwlabscrm.myfreshworks.com/crm/sales'; 
+const API_TOKEN = 'QPDW5whjK9BWBzWYc7opbA';  
 
-const FRESHSALES_DOMAIN = 'fwlabscrm.myfreshworks.com/crm/sales'; // Replace with your Freshsales domain
-const API_TOKEN = 'QPDW5whjK9BWBzWYc7opbA'; // Replace with your actual Freshsales API token
-
-app.post('/api/create-contact', (req, res) => {  // Make sure the route starts with /api
+// Export a function directly
+module.exports = async (req, res) => {
+  if (req.method === 'POST') {
     const { first_name, last_name, email } = req.body;
 
     const contactData = {
-        contact: {
-            first_name: first_name,
-            last_name: last_name,
-            email: email,
-            lifecycle_stage_id: 403017878192
-        }
+      contact: {
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        lifecycle_stage_id: 403017878192
+      }
     };
 
-    axios.post(`https://${FRESHSALES_DOMAIN}/api/contacts`, contactData, {
+    try {
+      const response = await axios.post(`https://${FRESHSALES_DOMAIN}/api/contacts`, contactData, {
         headers: {
-            'Authorization': `Token token=${API_TOKEN}`,
-            'Content-Type': 'application/json'
+          'Authorization': `Token token=${API_TOKEN}`,
+          'Content-Type': 'application/json'
         }
-    })
-    .then(response => {
-        res.send('Contact created successfully!');
-    })
-    .catch(error => {
-        console.error('Error:', error.response ? error.response.data : error.message);
-        res.status(500).send('Failed to create contact.');
-    });
-});
+      });
 
+      // Return success response
+      res.status(200).send('Contact created successfully!');
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
+      // Return error response
+      res.status(500).send('Failed to create contact.');
+    }
+  } else {
+    // Return error if method is not POST
+    res.status(405).send('Method Not Allowed');
+  }
+};
