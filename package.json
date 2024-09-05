@@ -1,12 +1,9 @@
 {
-  "name": "my-vercel-app",
+  "name": "freshsales-contact-form",
   "version": "1.0.0",
-  "main": "api/server.js",
+  "description": "A contact form for Freshsales integration",
+  "main": "create-contact.js",
   "dependencies": {
-    "express": "^4.17.1",
     "axios": "^0.21.1"
-  },
-  "scripts": {
-    "start": "node api/server.js"
   }
 }
