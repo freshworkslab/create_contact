@@ -34,4 +34,3 @@ app.post('/api/create-contact', (req, res) => {  // Make sure the route starts w
     });
 });
 
-module.exports = app;
